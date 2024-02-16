@@ -160,7 +160,7 @@ if repack:
    for file in showProgress(RomFile):
        sjissFile = rom.getFileByName(file)
        sjissData = ndspy.bmg.BMG(sjissFile)
-       with open(mainFolder + file[:-3].replace('English/Message/', '') + 'txt', 'r') as sjissFile:
+       with open(mainFolder + file[:-3].replace('English/Message/', '') + 'txt', 'r', encoding='utf-16-le') as sjissFile:
            sjissFile = sjissFile.read()
            sjissFile = Stream.stream(io.StringIO(sjissFile))
            for address in range(len(sjissData.messages)):
@@ -196,7 +196,7 @@ if repack:
 
 if fstring:
    file_ = []
-   text = input('string : ').encode('utf-8')
+   text = input('string : ').encode('utf-16-le')
    subprocess.Popen('clear', shell=True).wait()
    for (root, dirs, files) in os.walk('data/'):
        for file in files:
@@ -211,7 +211,7 @@ if fstring:
                print('━' * 29)
                string = sjisdata.read(100).replace(
                    b'\x00', b'\n').replace(
-                       b'\xe2\x94\x81', b'\b' * 42).decode('utf-8', 'ignore'
+                       b'\xe2\x94\x81', b'\b' * 42).decode('utf-16-le', 'ignore'
                )
                print(
                    'Nama File =\x1b[92m', files + '\n\n\x1b[0m' + string)
