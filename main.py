@@ -133,7 +133,7 @@ if extract:
         flags = True
         outFile = file.replace('.bmg', '.txt')
         files = outFile.removeprefix('English/Message/')
-        with open(mainFolder + files, mode='w') as sjis:
+        with open(mainFolder + files, mode='w', encoding='utf-16-le') as sjis:
             sjisFile = rom.getFileByName(file)
             sjisData = ndspy.bmg.BMG(sjisFile)
             f = Stream.stream(io.StringIO(''))
